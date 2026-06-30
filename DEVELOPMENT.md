@@ -1,15 +1,10 @@
-# Guía de Desarrollo
+# 📝 Guía de Desarrollo
 
-Esta guía proporciona instrucciones para configurar y ejecutar el Sistema Académico en modo desarrollo.
+Guía para desarrolladores trabajando en el Sistema Académico.
 
-## 🚀 Inicio Rápido
+## 🚀 Setup Inicial
 
-### Requisitos
-- Python 3.8+
-- Node.js 16+
-- npm 8+
-
-### Backend
+### 1. Backend
 
 ```bash
 cd backend
@@ -17,15 +12,16 @@ cd backend
 # Crear entorno virtual
 python -m venv venv
 
-# Activar entorno (Windows)
+# Activar (Windows)
 venv\Scripts\activate
-# Activar entorno (macOS/Linux)
+
+# Activar (macOS/Linux)
 source venv/bin/activate
 
 # Instalar dependencias
 pip install -r requirements.txt
 
-# Copiar variables de entorno
+# Configurar variables de entorno
 copy .env.example .env  # Windows
 cp .env.example .env    # macOS/Linux
 
@@ -33,9 +29,9 @@ cp .env.example .env    # macOS/Linux
 python app.py
 ```
 
-El servidor estará disponible en `http://localhost:5000`
+El servidor estará en `http://localhost:5000`
 
-### Frontend
+### 2. Frontend
 
 ```bash
 cd frontend
@@ -43,32 +39,20 @@ cd frontend
 # Instalar dependencias
 npm install
 
-# Copiar variables de entorno
+# Configurar variables de entorno
 copy .env.example .env  # Windows
 cp .env.example .env    # macOS/Linux
 
-# Ejecutar en modo desarrollo
+# Ejecutar en desarrollo
 npm run dev
 ```
 
-La aplicación estará disponible en `http://localhost:5173`
+La aplicación estará en `http://localhost:5173`
 
-## 📝 Estructura del Código
+## 📡 API Endpoints
 
-### Backend (Flask)
-- `app.py` - Aplicación principal y rutas
-- `requirements.txt` - Dependencias Python
-
-### Frontend (React + Vite)
-- `src/App.jsx` - Componente principal
-- `src/App.css` - Estilos
-- `src/main.jsx` - Punto de entrada
-- `vite.config.js` - Configuración de Vite
-
-## 🔌 API Endpoints
-
-### Salud del Sistema
-```bash
+### Health Check
+```
 GET /api/health
 ```
 
@@ -76,12 +60,14 @@ Respuesta:
 ```json
 {
   "status": "healthy",
-  "message": "Backend Flask para el Sistema Académico está activo y funcionando."
+  "message": "Backend Flask para el Sistema Académico está activo y funcionando.",
+  "environment": "development",
+  "version": "1.0.0"
 }
 ```
 
 ### Estadísticas
-```bash
+```
 GET /api/stats
 ```
 
@@ -96,7 +82,7 @@ Respuesta:
 ```
 
 ### Módulos
-```bash
+```
 GET /api/modules
 ```
 
@@ -112,78 +98,191 @@ Respuesta:
 ]
 ```
 
-## 🔍 Debugging
+## 🔧 Estructura de Configuración
+
+### Backend: `config.py`
+
+Configuración centralizada por ambiente:
+- **DevelopmentConfig** - Modo desarrollo (debug=true)
+- **ProductionConfig** - Modo producción (debug=false)
+- **TestingConfig** - Modo testing
+
+Se activa automáticamente según `FLASK_ENV` en `.env`.
+
+### Frontend: `src/config.js`
+
+Centraliza:
+- URLs de API
+- Endpoints
+- Feature flags
+- Timeouts y reintentos
+- Utilidad de logging
+
+## 📦 Agregar Dependencias
 
 ### Backend
-- Activar modo debug: Establecer `FLASK_ENV=development` en `.env`
-- Ver logs: Los logs se mostrarán en la consola del servidor
-- Error handling: Los errores se devuelven en formato JSON
 
-### Frontend
-- Abrir Developer Tools: F12 o Ctrl+Shift+I
-- React DevTools: Extensión de navegador recomendada
-- Consola: Busca mensajes de error y warnings
-
-## 📦 Agregar Nuevas Dependencias
-
-### Backend
 ```bash
+cd backend
+source venv/bin/activate  # Activar entorno
 pip install nombre-paquete
-pip freeze > requirements.txt
+pip freeze > requirements.txt  # IMPORTANTE: Actualizar archivo
 ```
 
 ### Frontend
+
 ```bash
+cd frontend
 npm install nombre-paquete
+# Automáticamente se actualiza package.json
 ```
 
-## ✅ Testing
+## 🔌 Agregar Nuevos Endpoints
+
+### Backend: `backend/app.py`
+
+```python
+@app.route('/api/nuevo-endpoint', methods=['GET', 'POST'])
+def nuevo_endpoint():
+    """Descripción del endpoint"""
+    return jsonify({
+        "datos": "respuesta"
+    }), 200
+```
+
+### Frontend: Consumir en `src/App.jsx`
+
+```javascript
+import { getApiUrl } from './config'
+
+const response = await fetch(getApiUrl('/api/nuevo-endpoint'))
+const data = await response.json()
+```
+
+## 🎨 Variables de Entorno
+
+### Backend (`.env`)
+
+```env
+FLASK_ENV=development           # development|production
+PORT=5000                       # Puerto del servidor
+SECRET_KEY=dev-secret-key       # Cambiar en producción
+CORS_ORIGINS=http://localhost:5173  # Orígenes permitidos
+DATABASE_URL=sqlite:///app.db   # [PENDIENTE] Cuando se elija BD
+```
+
+### Frontend (`.env`)
+
+```env
+VITE_API_URL=http://localhost:5000
+VITE_API_TIMEOUT=30000
+VITE_MAX_RETRY_ATTEMPTS=3
+```
+
+## 🐛 Debug
+
+### Backend
+
+```python
+# En backend/app.py
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)
+```
+
+Los cambios se recargan automáticamente.
+
+### Frontend
+
+1. Abrir DevTools: `F12` o `Ctrl+Shift+I`
+2. Ver logs en consola
+3. Usar React DevTools (extensión de navegador)
+
+## 📊 Scripts Disponibles
 
 ### Backend
 ```bash
-# Si se agrega pytest
-pytest
+python app.py              # Ejecutar servidor
 ```
 
 ### Frontend
 ```bash
-# Si se agrega vitest
-npm run test
+npm run dev       # Desarrollo
+npm run build     # Compilar para producción
+npm run preview   # Ver build compilado
+npm run lint      # Linter
 ```
 
-## 🎨 Estilos y Convenciones
+## ⚠️ Troubleshooting
 
-- Usar ESLint para JavaScript: `npm run lint`
-- Mantener consistencia en la nomenclatura
-- Documentar funciones complejas
-- Commits descriptivos
+### Backend falla al iniciar
+```bash
+# Verificar que las dependencias estén instaladas
+pip install -r requirements.txt
 
-## 📤 Antes de Hacer Push
+# Verificar que el entorno virtual esté activo
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate     # Windows
+```
 
-1. Asegúrese de que ambos servidores funcionan correctamente
-2. Verifique que no hay errores en la consola
-3. Actualice las dependencias: `pip freeze > requirements.txt`
-4. Commit de los cambios con mensajes descriptivos
-5. Push a la rama
+### Frontend no se conecta
+1. Verificar que backend esté corriendo en puerto 5000
+2. Verificar `VITE_API_URL` en `frontend/.env`
+3. Revisar consola del navegador (F12)
 
-## 🆘 Solución de Problemas
+### Puerto en uso
+```bash
+# Windows
+netstat -ano | findstr :5000
+taskkill /PID <PID> /F
 
-### El frontend no se conecta al backend
-- Verificar que el backend está ejecutándose en `http://localhost:5000`
-- Verificar la variable de entorno `VITE_API_URL` en frontend/.env
-- Revisar la consola del navegador para errores de CORS
+# macOS/Linux
+lsof -i :5000
+kill -9 <PID>
+```
 
-### Error de puerto en uso
-- Cambiar el puerto en backend/.env: `PORT=5001`
-- Backend: `python app.py`
-- Frontend: `npm run dev -- --port 5174`
+## 📝 Convenciones de Código
 
-### Módulos no encontrados
-- Backend: `pip install -r requirements.txt`
-- Frontend: `npm install`
+### Backend (Python)
+- Usar `snake_case` para variables y funciones
+- Usar `PascalCase` para clases
+- Máximo 100 caracteres por línea
+- Documentar con docstrings
 
-## 📚 Recursos Útiles
+### Frontend (JavaScript)
+- Usar `camelCase` para variables
+- Usar `PascalCase` para componentes React
+- Nombres descriptivos (no abreviar)
+- Comentar lógica compleja
 
-- [Flask Documentation](https://flask.palletsprojects.com/)
-- [React Documentation](https://react.dev/)
-- [Vite Documentation](https://vite.dev/)
+## 🔐 Seguridad
+
+**NO INCLUIR EN GIT:**
+- `.env` (variables sensibles)
+- `venv/` (entorno virtual)
+- `node_modules/` (dependencias)
+- `__pycache__/` (cache de Python)
+
+Todos están en `.gitignore` ✅
+
+## 📚 Próximos Pasos
+
+- [ ] Seleccionar base de datos (PostgreSQL/MySQL/SQLite)
+- [ ] Implementar autenticación/autorización
+- [ ] Crear modelos de base de datos
+- [ ] Agregar validaciones
+- [ ] Escribir tests
+- [ ] Preparar para deployment
+
+## 🤝 Flujo de Desarrollo
+
+1. **Crear rama**: `git checkout -b feature/nueva-funcionalidad`
+2. **Desarrollar**: Backend + Frontend
+3. **Probar**: Que se comuniquen correctamente
+4. **Commit**: `git commit -m 'Descripción clara'`
+5. **Push**: `git push origin feature/nueva-funcionalidad`
+
+## 📖 Más Información
+
+- Ver `README.md` para estructura del proyecto
+- Ver `database/README.md` para info sobre BD
+- Ver `docs/README.md` para documentación visual
