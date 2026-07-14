@@ -1,0 +1,128 @@
+# ============================================================
+#  .gitignore — Sistema Académico v4
+#  Backend: Python / Flask | Frontend: Vite / Node.js
+# ============================================================
+
+# ─────────────────────────────────────────
+#  BACKEND — Python / Flask
+# ─────────────────────────────────────────
+
+# Entornos virtuales
+backend/venv/
+backend/.venv/
+backend/env/
+backend/.env/
+
+# Cache de Python
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+
+# Bases de datos locales
+backend/*.db
+backend/*.sqlite
+backend/*.sqlite3
+backend/instance/
+
+# Variables de entorno (¡NUNCA subir al repo!)
+backend/.env
+backend/.env.local
+backend/.env.*.local
+
+# Distribución / empaquetado
+backend/dist/
+backend/build/
+backend/*.egg-info/
+backend/.eggs/
+
+# Pytest / cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# MyPy
+.mypy_cache/
+
+# ─────────────────────────────────────────
+#  FRONTEND — Node.js / Vite
+# ─────────────────────────────────────────
+
+# Dependencias (¡el directorio más pesado!)
+frontend/node_modules/
+
+# Build de producción
+frontend/dist/
+frontend/build/
+
+# Cache de Vite
+frontend/.vite/
+
+# Variables de entorno del frontend
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Logs de npm / yarn / pnpm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# Lockfiles opcionales (mantener package-lock.json)
+# package-lock.json  ← descomenta si no quieres versionar esto
+yarn.lock
+
+# ─────────────────────────────────────────
+#  EDITORES E IDEs
+# ─────────────────────────────────────────
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+
+# JetBrains (IntelliJ, PyCharm, WebStorm…)
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-workspace
+
+# ─────────────────────────────────────────
+#  SISTEMA OPERATIVO
+# ─────────────────────────────────────────
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+ehthumbs.db
+
+# Linux
+*~
+
+# ─────────────────────────────────────────
+#  OTROS ARCHIVOS TEMPORALES / INNECESARIOS
+# ─────────────────────────────────────────
+
+# Archivos temporales
+*.tmp
+*.temp
+*.swp
+*.bak
+*.orig
+
+# Logs generales
+*.log
+
+# Documentos generados automáticamente (descomenta si aplica)
+# docs/_build/
