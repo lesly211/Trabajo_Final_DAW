@@ -6,6 +6,11 @@ Frontend en **React + Vite**, backend en **Python Flask** con **JWT** y roles di
 > Evaluación Final — Desarrollo de Aplicaciones Web (Semestre IX)
 > Dr. Jaime Suasnábar Terrel — Universidad Nacional del Centro del Perú
 
+# INTEGRANTES
+BARJA ORTIZ, Erick Gerson
+ESPÍRITU DIAZ, Olayne Guadalupe María Isabel
+NAVARRO SERVA, Lesly Brenda
+
 ---
 
 ## Tabla de Contenidos
