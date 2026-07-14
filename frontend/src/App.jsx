@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import config, { logger, getApiUrl } from './config'
+import Matricula from './modules/Matricula'
+import CursosDocentes from './modules/CursosDocentes'
 
 function App() {
+  const [vista, setVista] = useState('dashboard') // dashboard | matricula | cursos
   const [backendStatus, setBackendStatus] = useState('checking') // checking, connected, disconnected
   const [stats, setStats] = useState({
     students_count: 0,
@@ -82,6 +85,17 @@ function App() {
         </button>
       </div>
 
+      {/* Navegación de módulos */}
+      <nav className="app-nav" aria-label="Módulos del sistema">
+        <button className={vista === 'dashboard' ? 'active' : ''} onClick={() => setVista('dashboard')}>Dashboard</button>
+        <button className={vista === 'matricula' ? 'active' : ''} onClick={() => setVista('matricula')}>Matrícula</button>
+        <button className={vista === 'cursos' ? 'active' : ''} onClick={() => setVista('cursos')}>Cursos y Docentes</button>
+      </nav>
+
+      {vista === 'matricula' && <Matricula />}
+      {vista === 'cursos' && <CursosDocentes />}
+
+      {vista === 'dashboard' && (<>
       {/* Stats Section */}
       <section className="stats-section">
         <div className="stat-card">
@@ -186,6 +200,8 @@ function App() {
           </div>
         </div>
       </section>
+
+      </>)}
 
       <footer className="main-footer">
         <p>Trabajo Final - Desarrollo de Aplicaciones Web © 2026</p>
