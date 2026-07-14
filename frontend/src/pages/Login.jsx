@@ -28,10 +28,6 @@ export default function Login() {
       <div className="login-art">
         <span className="eyebrow">Facultad de Ingeniería de Sistemas</span>
         <h1>Gestión académica integral, segura y en línea.</h1>
-        <p>
-          Matrícula, cursos, notas, record académico y certificados con código QR.
-          Un solo sistema para estudiantes, docentes, administración y dirección.
-        </p>
       </div>
       <div className="login-form-wrap">
         <div className="login-card">
@@ -55,12 +51,6 @@ export default function Login() {
             onClick={onSubmit} disabled={cargando}>
             {cargando ? "Ingresando…" : "Ingresar"}
           </button>
-          <div className="login-hint">
-            <b>Credenciales institucionales:</b><br />
-            <code>Estudiante</code>: código matrícula · clave: <code>inicial+apellido+4cifras+*</code><br />
-            <code>Docente</code>: d-nombreapellido001 · misma fórmula<br />
-            <code>Admin</code>: a-001 · <code>Dirección</code>: dir-001
-          </div>
         </div>
       </div>
     </div>

@@ -127,7 +127,7 @@ npm run dev              # http://localhost:5173
 
 ## Credenciales Institucionales
 
-### 👨‍🎓 Estudiantes — ingresan con su **código de matrícula**
+### Estudiantes — ingresan con su **código de matrícula**
 
 | Código (login) | Contraseña | Nombre |
 |---|---|---|
@@ -136,14 +136,14 @@ npm run dev              # http://localhost:5173
 | `2021100125` | `PGomez2021*` | Pedro Gómez Salas |
 | `2020100090` | `RFlores2020*` | Rosa Flores Núñez |
 
-### 👩‍🏫 Docentes — ingresan con **d-nombre+apellido+secuencia**
+### Docentes — ingresan con **d-nombre+apellido+secuencia**
 
 | Usuario (login) | Contraseña | Nombre |
 |---|---|---|
 | `d-marialopez001` | `MLopez0001*` | María López Ríos |
 | `d-jaimesuasnabar002` | `JSuasnabar0002*` | Jaime Suasnábar Terrel |
 
-### 👔 Administración — ingresan con su **código institucional**
+### Administración — ingresan con su **código institucional**
 
 | Usuario (login) | Contraseña | Rol |
 |---|---|---|
