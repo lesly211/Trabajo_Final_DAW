@@ -14,4 +14,7 @@ class Config:
     )
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JSON_SORT_KEYS = False
-    FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
+    FRONTEND_URL = os.getenv("FRONTEND_URL", "https://trabajofinaldwa.vercel.app")
+    CORS_ORIGINS = os.getenv(
+        "CORS_ORIGINS", "http://localhost:5173,https://trabajofinaldwa.vercel.app"
+    ).split(",")

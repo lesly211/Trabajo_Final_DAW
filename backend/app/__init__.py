@@ -14,7 +14,7 @@ def create_app(config_class=Config):
     # El endpoint público de verificación de certificados y el resto de
     # rutas viven bajo /api/*; se restringe el origen al frontend
     # configurado en vez de aceptar cualquier origen ("*").
-    cors.init_app(app, resources={r"/api/*": {"origins": app.config["FRONTEND_URL"]}})
+    cors.init_app(app, resources={r"/api/*": {"origins": app.config["CORS_ORIGINS"]}})
 
     # Modelos (registro en metadata)
     from .models import (  # noqa: F401
