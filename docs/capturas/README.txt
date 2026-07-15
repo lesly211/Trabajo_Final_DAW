@@ -1,5 +1,5 @@
 Coloque aquí las capturas de pantalla de las funcionalidades principales:
-- 01_login.png
+- Login.png
 - 02_dashboard_direccion.png
 - 03_matricula_estudiante.png
 - 04_cursos_admin.png
