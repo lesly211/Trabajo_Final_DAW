@@ -1,5 +1,9 @@
 """Punto de entrada de la aplicación."""
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from app import create_app
 from app.extensions import db
 from app.seeds.seed_data import seed_all
