@@ -116,16 +116,15 @@ sistema-academico/
 ```bash
 cd backend
 python -m venv venv
-# Windows: venv\Scripts\activate    |    Linux/Mac: source venv/bin/activate
 pip install -r requirements.txt
-python run.py            # Crea la BD, siembra datos y levanta en http://localhost:5000
+python run.py        
 ```
 
 ### Frontend
 ```bash
 cd frontend
 npm install
-npm run dev              # http://localhost:5173
+npm run dev
 ```
 
 ---
@@ -155,8 +154,6 @@ npm run dev              # http://localhost:5173
 | `a-001` | `CRamirez0001*` | Administrador |
 | `dir-001` | `ATorres0001*` | Dirección |
 
-> **Fórmula de contraseñas:** `[1ª letra del nombre en MAYÚSCULA]` + `[Apellido paterno]` + `[4 primeras cifras del código]` + `*`
-> Ejemplo: Juan Pérez / código 2021100123 → `JPerez2021*`
 
 ---
 
